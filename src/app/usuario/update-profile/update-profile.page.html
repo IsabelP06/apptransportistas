@@ -1,0 +1,27 @@
+<ion-content class="ion-padding">
+  <form action="" (submit)="editpasswordform.valid && changePassword(editpassword)" class="ion-padding" #editpasswordform="ngForm">
+    <ion-label>Contraseña</ion-label>
+    <input type="password" name="password" [(ngModel)]="editpassword.password" required class="input-text" id="password">
+    <ion-label>Nueva contraseña</ion-label>
+    <input type="password" name="newpassword" [(ngModel)]="editpassword.newpassword" required class="input-text" id="newpassword">
+    <ion-label>Confirmar contraseña</ion-label>
+    <input type="password" name="comfirmpassword" [(ngModel)]="editpassword.confirmpassword" required class="input-text" id="comfirmpassword">
+    <p *ngIf="editpassword.confirmpassword!=editpassword.newpassword">
+        <ion-text color="danger">
+         <small>
+          Las contraseñas no coinciden</small>
+        </ion-text>
+    </p>
+    <ion-button class="mt-2" [disabled]="loadingupdatepassword" type="submit">
+      <ion-icon name="save" ></ion-icon> &nbsp; Guardar
+    </ion-button>
+  </form>
+  <form action="" (submit)="editcorreo.valid && editCorreo()" class="ion-padding" #editcorreo="ngForm">
+    <ion-label>Editar correo <small >si ingresa mas de uno separe por punto y coma (;)</small></ion-label>
+    <textarea name="password" required [(ngModel)]="usuario.correo" class="textarea">
+    </textarea>
+    <ion-button class="mt-2" [disabled]="loadingupdatecorreo" type="submit">
+      <ion-icon name="save" ></ion-icon> &nbsp; Guardar
+    </ion-button> 
+  </form>
+</ion-content>

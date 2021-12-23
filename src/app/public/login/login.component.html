@@ -1,0 +1,27 @@
+    <div class="container p-2">
+      <div class="center-login">
+
+    
+      <form action="" class="w-100" (submit)="Login(user)">
+        <div class="container-icon ion-margin-top">
+          <ion-icon name="person-circle" class="icon-login"></ion-icon>
+        </div>
+        <ion-item class="mt-2">
+          <ion-label><ion-icon name="person-outline"></ion-icon></ion-label>
+          <ion-input autocomplete="email"  type="username" placeholder="Usuario" name="usuario" required [(ngModel)]="user.email"></ion-input>
+        </ion-item>
+        <ion-item class="mt-2">
+          <ion-label><ion-icon name="lock-closed-outline"></ion-icon></ion-label>
+          <ion-input autocomplete="current-password" placeholder="Contraseña" name="password" required [(ngModel)]="user.password" type="password"></ion-input>
+        </ion-item>
+       <ion-item *ngIf="messageError">
+         <ion-text class="text-danger ion-text-center">
+           <p>{{messageError}}</p> 
+          </ion-text>
+       </ion-item>   
+       <div class="d-flex justify-content-center">
+        <ion-button class="w-100 login-button" color="success" type="submit">Iniciar sesión</ion-button>
+       </div>
+      </form> 
+     </div>
+    </div>

@@ -1,0 +1,77 @@
+<ion-content>
+  <div class="p-2">
+    <ion-list>
+      <ion-item>
+        <ion-label slot="start">
+          Desde
+        </ion-label>
+        <ion-datetime display-format="YYYY/MM/DD" done-text="Seleccionar" [(ngModel)]="info.inicio"
+          cancel-text="Cancelar" placeholder="Seleccione una fecha" class="border-1" display-timezone="utc">
+        </ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label slot="start">
+          Hasta
+        </ion-label>
+        <ion-datetime display-format="YYYY/MM/DD" done-text="Seleccionar" [(ngModel)]="info.fin" cancel-text="Cancelar"
+          placeholder="Seleccione una fecha" class="border-2" display-timezone="utc"></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label>
+          Estado
+        </ion-label>
+        <ion-select value="" class="w-100" name="estado" [(ngModel)]="info.estado" okText="seleccionar"
+          cancelText="cancelar">
+          <ion-select-option value="">TODOS</ion-select-option>
+          <ion-select-option value="OK">OK</ion-select-option>
+          <ion-select-option value="NO OK">NO OK</ion-select-option>
+          <ion-select-option value="PENDIENTE">PENDIENTE</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+    </ion-list>
+    <div class="w-100 d-flex justify-content-end">
+
+      <ion-button (click)="buscar()">
+        <ion-icon name="search" slot="end"></ion-icon> Buscar
+      </ion-button>
+    </div>
+    <div class="w-100">
+      <div class="w-100 text-center mt-4" *ngIf="loading">
+
+        <ion-spinner name="lines-small"></ion-spinner>
+      </div>
+      <div class="w-100" *ngIf="!loading">
+        <ng-container *ngIf="registros.length">
+          <ion-list>
+            <ion-item *ngFor="let item of registros" [routerLink]="['/transportista/registro',item.id]">
+              <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
+              <ion-label>
+                <h2>{{item.orden_de_transporte}}</h2>
+                <h3>{{item.chofer}}</h3>
+                <p>{{item.cliente}}</p>
+                  <ion-badge color="success" *ngIf="item.estado_tracking=='OK'">OK</ion-badge>
+                  <ion-badge color="danger" *ngIf="item.estado_tracking=='NO OK'">NO OK</ion-badge>
+                  <ion-badge color="warning" *ngIf="item.estado_tracking=='PENDIENTE'">PENDIENTE</ion-badge>
+              </ion-label>
+              
+            </ion-item>
+          </ion-list>
+        </ng-container>
+        <ng-container *ngIf="!registros.length && searched">
+          <ion-list>
+            <ion-item>
+              <ion-label>
+                <p class="w-100 text-center"> Sin resultados</p>
+              </ion-label>
+            </ion-item>
+          </ion-list>
+        </ng-container>
+
+
+      </div>
+    </div>
+
+
+  </div>
+</ion-content>

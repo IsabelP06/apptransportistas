@@ -1,0 +1,83 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start" [routerLink]="['/transportista/registro',registro.id]" *ngIf="!loading">
+      <ion-icon name="chevron-back-outline" class="icon-custom"></ion-icon>
+    </ion-buttons>
+    <ion-title>
+      Guias RR
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="w-100 text-center mt-4" *ngIf="loading">
+    <ion-spinner name="lines-small"></ion-spinner>
+  </div>
+  <ion-list *ngIf="!loading">
+    <div *ngFor="let item of guias_remision; let i=index" [attr.data-index]="i">
+      <div class="w-100 p-2">
+        <p>Guia {{item}}</p>
+      </div>
+      <div class="w-100">
+        <form action="" (submit)="subirArchivos($event,item)">
+          <ion-item>
+            <ion-label>Guia transportista</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-input placeholder="Seleccione su archivo"  required type="file" accept="application/pdf" name="guia_transportista{{i}}">
+            </ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label>Guia de cobranza</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-input placeholder="Seleccione su archivo" required type="file" accept="application/pdf" name="guia_venta{{i}}"></ion-input>
+          </ion-item>
+          <div class="w-100 d-flex justify-content-end">
+            <ion-button type="submit" [disabled]="loadingfile" color="danger">Entregar</ion-button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </ion-list>
+  <ion-list *ngIf="guias_entregadas.length">
+    <ion-item color="success">
+      <ion-label>Guias entregadas</ion-label>
+    </ion-item>
+    <ion-item *ngFor="let item of guias_entregadas; let i=index" [attr.data-index]="i">
+      <ion-label>
+        <p>Guia {{item}}</p>
+      </ion-label>
+      <ion-icon (click)="editEntregaFile(item)" name="create-sharp"></ion-icon>
+    </ion-item>
+  </ion-list>
+  <ion-list *ngIf="editarEntregaGuia">
+    <div class="w-100 p-2">
+      <ion-item color="primary">
+        <ion-label >
+          <p>Guia {{guiaEditar}}</p>
+        </ion-label>
+        <ion-icon name="close" (click)="closeFormEditar()"></ion-icon>
+      </ion-item>
+    </div>
+    <div class="w-100">
+      <form action="" (submit)="subirArchivosEditado($event,guiaEditar)">
+        <ion-item>
+          <ion-label>Guia transportista </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-input placeholder="Seleccione su archivo" required type="file" name="editar_guia_transportista">
+          </ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Guia de cobranza</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-input placeholder="Seleccione su archivo" required type="file" name="editar_guia_venta"></ion-input>
+        </ion-item>
+        <div class="w-100 d-flex justify-content-end">
+          <ion-button type="submit" [disabled]="loadingfile" color="danger">Guardar</ion-button>
+        </div>
+      </form>
+    </div>
+  </ion-list>
+</ion-content>

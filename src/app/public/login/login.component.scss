@@ -1,0 +1,26 @@
+.login-button{
+    padding: 0em 0em;
+    margin-top: 2em;
+}
+.p-2{
+    padding: 2em;
+}
+.container-icon{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.icon-login{
+    font-size: 4em;
+    color:rgb(11, 180, 76);
+    text-align: center;
+}
+.center-login{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.text-danger{
+    color: red;
+}

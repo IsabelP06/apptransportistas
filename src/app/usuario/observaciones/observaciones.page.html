@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start" [routerLink]="['/transportista/registro',registro.id]" *ngIf="!loading">
+      <ion-icon name="chevron-back-outline" class="icon-custom"></ion-icon>
+    </ion-buttons>
+    <ion-title>
+      Observaciones
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="w-100 text-center mt-4" *ngIf="loading">
+    <ion-spinner name="lines-small"></ion-spinner>
+  </div>
+  <ion-list *ngIf="!loading">
+    <ion-item *ngFor="let item of registro.observations">
+      <ion-label>
+        <h2>{{item.nombre}}</h2>
+        <p>{{item.cantidad}}</p>
+      </ion-label>
+      <ion-buttons>
+        <ion-icon name="trash" color="danger" (click)="deleteObservation(item.id)"></ion-icon>
+      </ion-buttons>
+    </ion-item>
+  </ion-list>
+  <div class="w-100">
+    <form action="" (submit)="newobservacion.valid && addObservation()" #newobservacion="ngForm">
+      <ion-item>
+        <ion-select placeholder="Observacion" required name="observacion" [(ngModel)]="newobservation.observacion_id">
+          <ion-select-option *ngFor="let observacion of observaciones" [value]="observacion.id">{{observacion.nombre}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-input placeholder="cantidad" required type="string" name="cantidad" [(ngModel)]="newobservation.cantidad" ></ion-input>
+      </ion-item>
+      <ion-button [disabled]="newobservacion.invalid" type="submit" >Agregar</ion-button>
+    </form>
+
+  </div>
+
+</ion-content>

@@ -1,0 +1,7 @@
+{
+  "name": "transportista",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
